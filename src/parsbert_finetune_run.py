@@ -8,9 +8,9 @@ from pathlib import Path
 from sklearn.model_selection import train_test_split
 import pandas
 import torch
-from transformers import DistilBertForSequenceClassification, Trainer, \
-      TrainingArguments, BertForSequenceClassification, BertForSequenceClassification
-from transformers import DistilBertTokenizerFast, BertTokenizer
+from transformers import Trainer, \
+      TrainingArguments, BertForSequenceClassification
+from transformers import BertTokenizer
 
 
 def load_dataset():
@@ -83,7 +83,6 @@ if __name__ == '__main__':
     train_dataset = Dataset(train_encodings, train_labels)
     valid_dataset = Dataset(valid_encodings, valid_labels)
     test_dataset = Dataset(test_encodings, test_labels)
-
 
     training_args = TrainingArguments(
         output_dir='./results',  # output directory

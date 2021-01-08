@@ -7,7 +7,7 @@ from collections import Counter
 import numpy as np
 import torch
 from sklearn.metrics import precision_recall_fscore_support, f1_score, accuracy_score
-from opinion_politic.utils.evaluation_helper import categorical_accuracy, binary_accuracy
+from opinion_politic.utils.evaluation_helper import categorical_accuracy
 
 
 logging.basicConfig(
@@ -72,12 +72,11 @@ def train(model, iterator, optimizer, criterion,  augmentation_class=None,
 
         # predict output
         # batch.text = [batch size, sent len]
-        predictions = model(text)#.squeeze(1)
+        predictions = model(text) #.squeeze(1)
 
         # calculate loss
         # loss = criterion(predictions, label.float())
         loss = criterion(predictions, label)
-
 
         # calculate accuracy
         acc = categorical_accuracy(predictions, label)
@@ -125,7 +124,7 @@ def evaluate(model, iterator, criterion):
             # predict input data
             text, text_lengths = batch.text
             label = batch.label
-            predictions = model(text)#.squeeze(1)
+            predictions = model(text) #.squeeze(1)
 
             # calculate loss
             # loss = criterion(predictions, label.float())
@@ -139,16 +138,14 @@ def evaluate(model, iterator, criterion):
             precision, recall, fscore, _ = \
                 precision_recall_fscore_support(y_true=label.cpu(),
                                                 y_pred=np.argmax(predictions.cpu(), axis=1))
-
             # precision, recall, fscore, _ = \
             #     precision_recall_fscore_support(y_true=label,
             #                                     y_pred=torch.round(torch.sigmoid(predictions)))
 
             # calculate total f-score of all data
-            total_f_score = f1_score(y_true=label,
-                                     y_pred=np.argmax(predictions, axis=1),
+            total_f_score = f1_score(y_true=label.cpu(),
+                                     y_pred=np.argmax(predictions.cpu(), axis=1),
                                      average="weighted")
-
             # total_f_score = f1_score(y_true=label,
             #                          y_pred=torch.round(torch.sigmoid(predictions)),
             #                          average="weighted")
