@@ -1,5 +1,5 @@
 """
-lstm_att_run.py is written for run Lstm_Att model
+dc_lstm_run.py is written for run Dc_Lstm model
 """
 
 import time
@@ -13,14 +13,15 @@ from opinion_politic.utils.log_helper import count_parameters, process_time, \
     model_result_log, model_result_save, draw_curves, test_aug_result_log
 from opinion_politic.train.train import train, evaluate, evaluate_aug_text
 
-from opinion_politic.methods.lstm_att_model import LSTM_ATT
-from opinion_politic.config.lstm_att_config import LOG_PATH, \
+from opinion_politic.methods.dc_lstm_model import DC_LSTM
+from opinion_politic.config.dc_lstm_config import LOG_PATH, \
     TRAIN_DATA_PATH, TEST_DATA_PATH, VALID_DATA_PATH, \
     EMBEDDING_PATH, EMBEDDING_DIM, START_DROPOUT, \
     MIDDLE_DROPOUT, FINAL_DROPOUT, USE_POS, DEVICE, \
-    N_EPOCHS, MODEL_PATH, HIDDEN_DIM, N_LAYERS,\
+    N_EPOCHS, MODEL_PATH, N_LAYERS,\
     BIDIRECTIONAL, USE_AUG, TEST_USE_AUG, \
-    TEST_AUG_LOG_PATH, STEP_LR, OUTPUT_DIM
+    TEST_AUG_LOG_PATH, STEP_LR, OUTPUT_DIM, \
+    FIRST_HIDDEN_DIM, SECOND_HIDDEN_DIM, THIRD_HIDDEN_DIM
 
 
 logging.basicConfig(
@@ -55,13 +56,13 @@ class RunModel:
         define loss function and optimizer
         """
         # create model
-
-        model = LSTM_ATT(vocab_size=data_set.num_vocab_dict["num_token"],
-                         embedding_dim=EMBEDDING_DIM, hidden_dim=HIDDEN_DIM,
-                         n_layers=N_LAYERS, bidirectional=BIDIRECTIONAL,
-                         start_dropout=START_DROPOUT, middle_dropout=MIDDLE_DROPOUT, final_dropout=FINAL_DROPOUT,
-                         output_size=OUTPUT_DIM, pad_idx=data_set.pad_idx_dict["token_pad_idx"])
-
+        model = DC_LSTM(vocab_size=data_set.num_vocab_dict["num_token"],
+                        embedding_dim=EMBEDDING_DIM, first_hidden_dim=FIRST_HIDDEN_DIM,
+                        second_hidden_dim=SECOND_HIDDEN_DIM, third_hidden_dim=THIRD_HIDDEN_DIM,
+                        output_size=OUTPUT_DIM, n_layers=N_LAYERS,
+                        bidirectional=BIDIRECTIONAL, start_dropout=START_DROPOUT,
+                        middle_dropout=MIDDLE_DROPOUT, final_dropout=FINAL_DROPOUT,
+                        pad_idx=data_set.pad_idx_dict["token_pad_idx"])
 
         # initializing model parameters
         model.apply(init_weights)

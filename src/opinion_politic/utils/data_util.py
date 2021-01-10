@@ -10,7 +10,7 @@ from torchtext import data
 from torchtext.vocab import Vectors
 import numpy as np
 from sklearn.utils import class_weight
-from opinion_politic.config.lstm_att_config import TEXT_FIELD_PATH,\
+from opinion_politic.config.ac_lstm_config import TEXT_FIELD_PATH,\
     LABEL_FIELD_PATH, BATCH_SIZE, DEVICE, USE_STOPWORD, STOPWORDS_PATH, \
     IS_TRANSFORMER, MAX_LEN
 
@@ -68,10 +68,10 @@ class DataSet:
         if USE_STOPWORD:
             stop_word = self.create_stopword()
             text_field = data.Field(sequential=True, tokenize=hazm.word_tokenize, batch_first=True,
-                                    include_lengths=True, stop_words=stop_word)
+                                    include_lengths=True, stop_words=stop_word, fix_length=MAX_LEN)
         else:
             text_field = data.Field(sequential=True, tokenize=hazm.word_tokenize, batch_first=True,
-                                    include_lengths=True)
+                                    include_lengths=True, fix_length=MAX_LEN)
 
         if IS_TRANSFORMER:
             text_field = data.Field(sequential=True, tokenize=hazm.word_tokenize, batch_first=True,

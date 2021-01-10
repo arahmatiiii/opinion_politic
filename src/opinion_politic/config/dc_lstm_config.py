@@ -1,5 +1,5 @@
 """
-config.py is written for Lstm_Att_Model
+config.py is written for Dc_Lstm_Model
 """
 
 import torch
@@ -8,14 +8,16 @@ DEVICE = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
 N_EPOCHS = 3
 EMBEDDING_DIM = 300
-START_DROPOUT = 0.2
+START_DROPOUT = 0.5
 MIDDLE_DROPOUT = 0.2
 FINAL_DROPOUT = 0.2
 BATCH_SIZE = 64
 OUTPUT_DIM = 2
 MAX_LEN = 70
 
-HIDDEN_DIM = 50
+FIRST_HIDDEN_DIM = 50
+SECOND_HIDDEN_DIM = 50
+THIRD_HIDDEN_DIM = 50
 N_LAYERS = 1
 BIDIRECTIONAL = True
 
@@ -36,7 +38,7 @@ STOPWORDS_PATH = "../data/Processed/stopwords.xlsx"
 EVAL_USER_PATH = "../data/Intermadiate/evaluation_user.csv"
 EVAL_USER_DATA_PATH = "../data/Intermadiate/evaluation_user_data/"
 
-palce_save = 'Lstm_Att/ID_0'
+palce_save = 'Dc_Lstm/ID_0'
 TEXT_FIELD_PATH = "../models/"+palce_save+"/Fields/text_field.Field"
 LABEL_FIELD_PATH = "../models/"+palce_save+"/Fields/label_field.Field"
 POS_FIELD_PATH = "../models/"+palce_save+"/Fields/pos_field.Field"

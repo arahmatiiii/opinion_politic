@@ -4,7 +4,7 @@ augmentation.py is writen for augment data in dataLoader
 
 import random
 import gensim
-from opinion_politic.config.lstm_att_config import EMBEDDING_PATH
+from opinion_politic.config.ac_lstm_config import EMBEDDING_PATH
 
 
 class Augmentation:

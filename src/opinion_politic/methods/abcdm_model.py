@@ -47,7 +47,6 @@ class ABCDM(nn.Module):
             nn.ReLU(),
             nn.Dropout(kwargs["final_dropout"]),
             nn.Linear(in_features=64, out_features=kwargs["output_size"]),
-            # nn.Sigmoid(),
         )
 
         self.batchnorm = nn.BatchNorm1d(num_features=8 * kwargs['n_filters'])
