@@ -1,5 +1,5 @@
 """
-config.py is written for AC_LSTM_Mmodel
+config.py is written for DPCNN_Model
 """
 
 import torch
@@ -16,11 +16,6 @@ OUTPUT_DIM = 2
 MAX_LEN = 70
 
 N_FILTERS = 50
-FILTER_SIZES = [3]
-
-HIDDEN_DIM = 50
-N_LAYERS = 1
-BIDIRECTIONAL = True
 
 IS_TRANSFORMER = False
 STEP_LR = False
@@ -38,13 +33,13 @@ STOPWORDS_PATH = "../data/Processed/stopwords.xlsx"
 EVAL_USER_PATH = "../data/Intermadiate/evaluation_user.csv"
 EVAL_USER_DATA_PATH = "../data/Intermadiate/evaluation_user_data/"
 
-palce_save = 'Ac_Lstm/ID_0'
+palce_save = 'Dpcnn/ID_0'
 TEXT_FIELD_PATH = "../models/"+palce_save+"/Fields/text_field.Field"
 LABEL_FIELD_PATH = "../models/"+palce_save+"/Fields/label_field.Field"
 POS_FIELD_PATH = "../models/"+palce_save+"/Fields/pos_field.Field"
 MODEL_PATH = "../models/"+palce_save+"/"
 
-detiels = 'aclstm'
+detiels = 'test'
 LOG_PATH = "../models/"+palce_save+"/Logs/log "+detiels+".txt"
 TEST_AUG_LOG_PATH = "../models/"+palce_save+"/Logs/log_aug "+detiels+".txt"
 LOSS_CURVE_PATH = "../models/"+palce_save+"/Curves/loss_curve "+detiels+".png"

@@ -10,7 +10,7 @@ from torchtext import data
 from torchtext.vocab import Vectors
 import numpy as np
 from sklearn.utils import class_weight
-from opinion_politic.config.ac_lstm_config import TEXT_FIELD_PATH,\
+from opinion_politic.config.dpcnn_config import TEXT_FIELD_PATH,\
     LABEL_FIELD_PATH, BATCH_SIZE, DEVICE, USE_STOPWORD, STOPWORDS_PATH, \
     IS_TRANSFORMER, MAX_LEN
 
