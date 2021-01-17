@@ -18,6 +18,7 @@ ENC_DROPOUT = 0.2
 MAX_LEN = 70
 
 
+IS_ELMO = False
 IS_TRANSFORMER = True
 STEP_LR = False
 TEST_USE_AUG = False

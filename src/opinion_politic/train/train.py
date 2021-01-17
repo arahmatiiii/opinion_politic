@@ -8,7 +8,7 @@ import numpy as np
 import torch
 from sklearn.metrics import precision_recall_fscore_support, f1_score, accuracy_score
 from opinion_politic.utils.evaluation_helper import categorical_accuracy
-
+from opinion_politic.config.rcnn_config import IS_ELMO
 
 logging.basicConfig(
     format="%(asctime)s : %(levelname)s : %(message)s", level=logging.INFO)
@@ -72,7 +72,10 @@ def train(model, iterator, optimizer, criterion,  augmentation_class=None,
 
         # predict output
         # batch.text = [batch size, sent len]
-        predictions = model(text) #.squeeze(1)
+        if IS_ELMO:
+            predictions = model(text, text_lengths)
+        else:
+            predictions = model(text)
 
         # calculate loss
         # loss = criterion(predictions, label.float())
@@ -124,9 +127,12 @@ def evaluate(model, iterator, criterion):
             # predict input data
             text, text_lengths = batch.text
             label = batch.label
-            predictions = model(text) #.squeeze(1)
+            if IS_ELMO:
+                predictions = model(text, text_lengths)
+            else:
+                predictions = model(text)
 
-            # calculate loss
+                # calculate loss
             # loss = criterion(predictions, label.float())
             loss = criterion(predictions, label)
 

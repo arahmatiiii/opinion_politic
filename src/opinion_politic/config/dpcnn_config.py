@@ -17,6 +17,7 @@ MAX_LEN = 70
 
 N_FILTERS = 50
 
+IS_ELMO = False
 IS_TRANSFORMER = False
 STEP_LR = False
 TEST_USE_AUG = False

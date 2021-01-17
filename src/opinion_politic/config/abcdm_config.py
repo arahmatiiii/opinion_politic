@@ -21,7 +21,7 @@ HIDDEN_DIM = 50
 N_LAYERS = 1
 BIDIRECTIONAL = True
 
-
+IS_ELMO = False
 STEP_LR = False
 TEST_USE_AUG = False
 USE_AUG = False

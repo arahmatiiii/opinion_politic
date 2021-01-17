@@ -10,9 +10,9 @@ from torchtext import data
 from torchtext.vocab import Vectors
 import numpy as np
 from sklearn.utils import class_weight
-from opinion_politic.config.dpcnn_config import TEXT_FIELD_PATH,\
+from opinion_politic.config.rcnn_config import TEXT_FIELD_PATH,\
     LABEL_FIELD_PATH, BATCH_SIZE, DEVICE, USE_STOPWORD, STOPWORDS_PATH, \
-    IS_TRANSFORMER, MAX_LEN
+    IS_TRANSFORMER, IS_ELMO, MAX_LEN
 
 
 logging.basicConfig(
@@ -52,7 +52,7 @@ class DataSet:
         dataset = dataset.astype({"label": "int"})
 
         print('value count in label is : \n', dataset['label'].value_counts())
-        return dataset[:200]
+        return dataset[:100]
 
     @staticmethod
     def create_stopword():
@@ -108,10 +108,11 @@ class DataSet:
         valid_data = data.Dataset(valid_examples, data_fields)
 
         # build vocab in all fields
-        if IS_TRANSFORMER:
+        if IS_TRANSFORMER or IS_ELMO:
             logging.info("Start creating text_field vocabs.")
             self.dictionary_fields["text_field"].build_vocab(train_data,
                                                              min_freq=10)
+
         else:
             logging.info("Start creating text_field vocabs.")
             self.dictionary_fields["text_field"].build_vocab(train_data,
@@ -121,7 +122,7 @@ class DataSet:
 
         self.text_field = self.dictionary_fields["text_field"]
 
-        if not IS_TRANSFORMER:
+        if (not IS_TRANSFORMER) or (not IS_ELMO):
             # get embedding vector for all vocabs
             self.embedding_dict["vocab_embedding_vectors"] = \
                 self.dictionary_fields["text_field"].vocab.vectors

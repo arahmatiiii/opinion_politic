@@ -5,6 +5,7 @@ import pandas
 import ast
 import re
 import hazm
+import glob
 from opinion_politic.pre_process.normalizer import Normalizing_characters
 
 
@@ -15,8 +16,9 @@ class clean_user:
     '''
     def __init__(self):
         self.new_normalizer = Normalizing_characters()
-        self.evaluation_user_path = '../../../data/Intermadiate/evaluation_user.csv'
+        self.evaluation_user_path = '../../../data/Intermadiate/evaluation_user_big.csv'
         self.crawled_data_path = '../../../data/Intermadiate/crawled_data/'
+        self.evaluation_user_data = '../../../dara/Intermadiate/evaluation_user_data_big/'
 
     def create_user_files(self):
         evaluation_users = pandas.read_csv(self.evaluation_user_path)
@@ -40,7 +42,20 @@ class clean_user:
                     print(f'{(i/len(user_csv_noreply))*100 :.2f} done {user} {user_index}')
 
             user_csv_noreply_normed = pandas.DataFrame({'tweet': user_tweets})
-            user_csv_noreply_normed.to_csv(user_csv_path.replace('crawled_data', 'evaluation_user_data'), index=False)
+            user_csv_noreply_normed.to_csv(user_csv_path.replace('crawled_data', 'evaluation_user_data_big'), index=False)
+
+    def delete_empty_user(self):
+        evaluation_user_big = pandas.read_csv('../../../data/Intermadiate/evaluation_user_big.csv')
+        new_user_username = []
+        new_user_laebl = []
+        for i, item in enumerate(evaluation_user_big.user):
+            user_csv = pandas.read_csv('../../../data/Intermadiate/evaluation_user_data_big/' + item.strip() + '.csv')
+            if len(user_csv) != 0:
+                new_user_username.append(item)
+                new_user_laebl.append(evaluation_user_big.label[i])
+        new_evaluation_user_big = pandas.DataFrame({'user': new_user_username, 'label': new_user_laebl})
+        new_evaluation_user_big.to_csv('../../../data/Intermadiate/new_evaluation_user_big.csv', index=False)
+        print(new_evaluation_user_big.label.value_counts())
 
 
 if __name__ == '__main__':

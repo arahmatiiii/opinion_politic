@@ -98,7 +98,6 @@ class TestUser:
                 if i % 1000 == 0:
                     print(f'{(i/len_user_csv_file)*100 :.2f} done {user} {user_index}')
 
-
             pos_propb = user_pos_count/len_user_csv_file * 100
             neg_prob = user_neg_count/len_user_csv_file * 100
 
