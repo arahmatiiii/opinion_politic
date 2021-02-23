@@ -1,6 +1,8 @@
 '''
 words_analysis.py is written for analysis words
 '''
+
+
 import pandas
 from collections import Counter
 import hazm

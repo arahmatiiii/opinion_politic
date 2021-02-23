@@ -97,8 +97,8 @@ class AC_LSTM(nn.Module):
 
 if __name__ == '__main__':
     model = AC_LSTM(vocab_size=2000, embedding_dim=300, hidden_dim=256, output_size=2,
-                     n_layers=2, bidirectional=True, start_dropout=0.5, middle_dropout=0.2,
-                     pad_idx=1, final_dropout=0.2, n_filters=120, filter_sizes=[3, 4, 5], fix_len=150)
+                    n_layers=2, bidirectional=True, start_dropout=0.5, middle_dropout=0.2,
+                    pad_idx=1, final_dropout=0.2, n_filters=120, filter_sizes=[3, 4, 5], fix_len=150)
     x = torch.rand((64, 150))
     model.forward(x.long())
 

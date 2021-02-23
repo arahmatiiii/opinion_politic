@@ -8,7 +8,7 @@ import numpy as np
 import torch
 from sklearn.metrics import precision_recall_fscore_support, f1_score, accuracy_score
 from opinion_politic.utils.evaluation_helper import categorical_accuracy
-from opinion_politic.config.rcnn_config import IS_ELMO
+from opinion_politic.config.apcnn_lstm_config import IS_ELMO
 
 logging.basicConfig(
     format="%(asctime)s : %(levelname)s : %(message)s", level=logging.INFO)

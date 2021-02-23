@@ -1,5 +1,5 @@
 """
-ac_lstm_run.py is written for run ABCDM_2 model
+apcnn_lstm.py is written for run Apcnn_lstm model
 """
 
 import time
@@ -13,8 +13,8 @@ from opinion_politic.utils.log_helper import count_parameters, process_time, \
     model_result_log, model_result_save, draw_curves, test_aug_result_log
 from opinion_politic.train.train import train, evaluate, evaluate_aug_text
 
-from opinion_politic.methods.ac_lstm_model import AC_LSTM
-from opinion_politic.config.ac_lstm_config import LOG_PATH, \
+from opinion_politic.methods.apcnn_lstm_model import APCNN_LSTM
+from opinion_politic.config.apcnn_lstm_config import LOG_PATH, \
     TRAIN_DATA_PATH, TEST_DATA_PATH, VALID_DATA_PATH, \
     EMBEDDING_PATH, EMBEDDING_DIM, START_DROPOUT, \
     MIDDLE_DROPOUT, FINAL_DROPOUT, USE_POS, DEVICE, \
@@ -55,14 +55,13 @@ class RunModel:
         define loss function and optimizer
         """
         # create model
-        model = AC_LSTM(vocab_size=data_set.num_vocab_dict["num_token"],
-                        embedding_dim=EMBEDDING_DIM, hidden_dim=HIDDEN_DIM,
-                        n_layers=N_LAYERS, bidirectional=BIDIRECTIONAL,
-                        start_dropout=START_DROPOUT, middle_dropout=MIDDLE_DROPOUT,
-                        final_dropout=FINAL_DROPOUT, n_filters=N_FILTERS,
-                        filter_sizes=FILTER_SIZES, fix_len=MAX_LEN,
-                        pad_idx=data_set.pad_idx_dict["token_pad_idx"],
-                        output_size=OUTPUT_DIM)
+        model = APCNN_LSTM(vocab_size=data_set.num_vocab_dict["num_token"],
+                           embedding_dim=EMBEDDING_DIM, hidden_dim=HIDDEN_DIM,
+                           n_layers=N_LAYERS, bidirectional=BIDIRECTIONAL,
+                           start_dropout=START_DROPOUT, middle_dropout=MIDDLE_DROPOUT,
+                           final_dropout=FINAL_DROPOUT, n_filters=N_FILTERS,
+                           filter_sizes=FILTER_SIZES, fix_len=MAX_LEN,
+                           pad_idx=data_set.pad_idx_dict["token_pad_idx"], output_size=OUTPUT_DIM)
 
         # initializing model parameters
         model.apply(init_weights)

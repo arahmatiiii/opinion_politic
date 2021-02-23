@@ -1,13 +1,14 @@
 '''
 clean_users_data is written for clean user tweets
 '''
+
+
 import pandas
 import ast
 import re
 import hazm
 import glob
 from opinion_politic.pre_process.normalizer import Normalizing_characters
-
 
 
 class clean_user:
@@ -58,6 +59,19 @@ class clean_user:
         print(new_evaluation_user_big.label.value_counts())
 
 
+def find_max(folder_path):
+    files_name = glob.glob(folder_path+'*.csv')
+    max_len = 0
+    xxx = 0
+    for file in files_name:
+        dataset = pandas.read_csv(file)
+        for i, item in enumerate(list(dataset.tweet)):
+            if len(hazm.word_tokenize(item)) >= max_len:
+                max_len = len(hazm.word_tokenize(item))
+    print(max_len)
+
+
 if __name__ == '__main__':
-    clean_user_object = clean_user()
-    clean_user_object.create_user_files()
+    # clean_user_object = clean_user()
+    # clean_user_object.create_user_files()
+    find_max('../../../data/Intermadiate/evaluation_user_data_big/')

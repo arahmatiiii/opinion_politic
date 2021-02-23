@@ -4,7 +4,7 @@ log_helper.py is a file to write methods which use for better log
 
 import logging
 import matplotlib.pyplot as plt
-from opinion_politic.config.rcnn_config import LOSS_CURVE_PATH, ACC_CURVE_PATH
+from opinion_politic.config.apcnn_lstm_config import LOSS_CURVE_PATH, ACC_CURVE_PATH
 
 
 logging.basicConfig(

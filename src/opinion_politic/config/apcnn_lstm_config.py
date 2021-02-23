@@ -1,5 +1,5 @@
 """
-config.py is written for AC_LSTM_Mmodel
+config.py is written for apcnn_lstm_Mmodel
 """
 
 import torch
@@ -36,16 +36,16 @@ VALID_DATA_PATH = "../data/Processed/valid_data_normed.csv"
 EMBEDDING_PATH = "../data/Embeddings/wor2vec_skipgram300d.txt"
 STOPWORDS_PATH = "../data/Processed/stopwords.xlsx"
 
-EVAL_USER_PATH = "../data/Intermadiate/evaluation_user_big.csv"
-EVAL_USER_DATA_PATH = "../data/Intermadiate/evaluation_user_data_big/"
+EVAL_USER_PATH = "../data/Intermadiate/evaluation_user_small.csv"
+EVAL_USER_DATA_PATH = "../data/Intermadiate/evaluation_user_data_small/"
 
-palce_save = 'Ac_Lstm/ID_0'
+palce_save = 'Apcnn_Lstm/ID_0'
 TEXT_FIELD_PATH = "../models/"+palce_save+"/Fields/text_field.Field"
 LABEL_FIELD_PATH = "../models/"+palce_save+"/Fields/label_field.Field"
 POS_FIELD_PATH = "../models/"+palce_save+"/Fields/pos_field.Field"
 MODEL_PATH = "../models/"+palce_save+"/"
 
-detiels = 'aclstm'
+detiels = 'apcnn_lstm'
 LOG_PATH = "../models/"+palce_save+"/Logs/log "+detiels+".txt"
 TEST_AUG_LOG_PATH = "../models/"+palce_save+"/Logs/log_aug "+detiels+".txt"
 LOSS_CURVE_PATH = "../models/"+palce_save+"/Curves/loss_curve "+detiels+".png"
